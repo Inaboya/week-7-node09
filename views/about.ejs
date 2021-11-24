@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <%- include('css') -%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Book Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a href="/postBooks" class="navbar-brand">Add New Book</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="" aria-current="page" href="/getBooks" class="nav-link active">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">View Books</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" data-mdb-ripple-color="dark" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <% about.forEach(function(books) { %>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                            <img src="https://kbimages1-a.akamaihd.net/9637e2c4-598e-4d84-a585-ca6c15a6d1cd/1200/1200/False/the-48-laws-of-power-7.jpg"
+                                alt="book-image" class="img-fluid">
+
+                                <a href="#">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.51);"></div>
+                                </a>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Title <%= books.Title %></h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Author <%=books.Author %></div>
+                        <div class="card-body">
+                            <h3>Book title</h3>
+
+                            <blockquote class="blockquote mb-0">
+                                <footer class="blockquote-footer">
+                                    <cite title="Source Title"><%= books.Title %></cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+
+                        <div class="card" style="width: 18rem;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Page Count: <%= books.pageCount %></li>
+                                <li class="list-group-item">Genre: <%= books.Genre %></li>
+                                <li class="list-group-item">Date Published: <%= books.datePublished %></li>
+                                <li class="list-group-item">Publisher: <%= books.Publisher %></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                </div>
+        </div>
+    </div>
+
+    <footer class="text-center text-white mt-5" style="background-color: #0a4275;">
+        <div class="container p-4 pb-0">
+            <section>
+                <p class="d-flex justify-content-center align-items-center">
+                    <span class="me-3">Home of Knowledge</span>
+
+                    <button type="button" class="btn btn-outline-light btn-rounded">
+                        View More
+                    </button>
+                </p>
+            </section>
+
+            <div class="text-center p-3" style="background-color: #0a4275;">
+                <a href="https://www.github.com/Inaboya" class="text-white">Github Page</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
