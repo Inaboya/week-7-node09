@@ -10,7 +10,7 @@ let filePath = path.join(__dirname, '../../database.json')
 
 router.get('/', function (req: Request, res: Response, next: NextFunction) {
   writejsonFile(filePath, books)
-  res.status(200).render("home", {books})
+  res.status(200).json(books)
 })
 
 /* GET particular book by ID */

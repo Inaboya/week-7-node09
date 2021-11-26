@@ -18,8 +18,8 @@ app.set('views', path_1.default.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 app.use((0, morgan_1.default)('dev'));
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000/'],
-    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+    origin: ["https://week-6-task.herokuapp.com/"],
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));

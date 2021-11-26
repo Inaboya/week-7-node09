@@ -18,10 +18,12 @@ app.set('view engine', 'ejs')
 
 app.use(logger('dev'))
 
-app.use(cors({
-  origin: ['http://localhost:3000/'],
-  methods : ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
-}))
+app.use(
+  cors({
+    origin: ["https://week-6-task.herokuapp.com/"],
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())

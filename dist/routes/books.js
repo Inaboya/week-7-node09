@@ -12,7 +12,7 @@ let filePath = path_1.default.join(__dirname, '../../database.json');
 /* GET books listing. */
 router.get('/', function (req, res, next) {
     writejsonFile(filePath, books);
-    res.status(200).render("home", { books });
+    res.status(200).json(books);
 });
 /* GET particular book by ID */
 router.get('/:id', (req, res, next) => {

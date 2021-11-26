@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Books Store</h1>
+        <div id="root"></div>
+    </div>
+
+    <script>
+        async function fetchBook() {
+            // Headers = 'Access-Control-Allow-Origin'
+            let res = await fetch("https://week-6-task.herokuapp.com/", {
+                mode: "no-cors"
+            });
+            console.log(res);
+
+            if (!res.ok) {
+                let msg = "An error occurred";
+                throw new Error(msg)
+            }
+
+            let books = await res.json();
+            return books;
+        }
+
+
+        fetchBook().then((res) => {
+            let books = res;
+            console.log(books);
+
+            books.map((book) => {
+                const {
+                    Title,
+                    Author,
+                    datePublished,
+                    Description,
+                    pageCount,
+                    Genre,
+                    Publisher
+                } = product
+
+                let output = `
+            <div class="shop-item">
+                <span class="shop-item-title">${Title}</span>
+                <img class="shop-item-image"
+                    src="https://static.zajo.net/content/mediagallery/zajo_dcat/image/product/types/X/9154.png">
+                <div class="shop-item-details">
+                    <h3>Price: </h3><span class="shop-item-price">
+                        <p>${Author}
+                    </span>
+                    <button class="btn btn-primary shop-item-button" type="button">VIEW</button>
+                </div>
+                <p class="shop-item-price">${Description}</p>
+                <p class="shop-item-price">${pageCount}</p>
+                <p class="shop-item-price">${Genre}</p>
+                <p class="shop-item-price">${Publisher}</p>
+            </div>
+
+
+            </div>`;
+
+                document.getElementById("root").innerHTML += output;
+            })
+        }).catch(console.log);
+    </script>
+</body>
+
+</html>
