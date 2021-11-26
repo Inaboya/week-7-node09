@@ -12,7 +12,7 @@ let filePath = path_1.default.join(__dirname, '../../database.json');
 /* GET books listing. */
 router.get('/', function (req, res, next) {
     writejsonFile(filePath, books);
-    res.status(200).json(books);
+    res.status(200).render("home", { books });
 });
 /* GET particular book by ID */
 router.get('/:id', (req, res, next) => {
@@ -23,6 +23,8 @@ router.get('/:id', (req, res, next) => {
 });
 /* POST a new book by ID */
 router.post('/', (req, res, next) => {
+    // const { error } = validateGenre(req.body)
+    // if (error) return res.status(400).send(error.details[0].message)
     const book = {
         Title: req.body.Title,
         Author: req.body.Author,

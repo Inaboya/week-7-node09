@@ -1,15 +1,16 @@
 import express, { Request, Response, NextFunction } from 'express'
 const router = express.Router()
 import path from 'path'
-import { Book } from './interface'
+import { Book, ErrorInt } from './interface'
 let books = require('../../database.json')
 import { writeFile } from 'fs'
 let filePath = path.join(__dirname, '../../database.json')
 
 /* GET books listing. */
+
 router.get('/', function (req: Request, res: Response, next: NextFunction) {
   writejsonFile(filePath, books)
-  res.status(200).json(books)
+  res.status(200).render("home", {books})
 })
 
 /* GET particular book by ID */
@@ -23,7 +24,8 @@ router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
 
 /* POST a new book by ID */
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
-  
+  // const { error } = validateGenre(req.body)
+  // if (error) return res.status(400).send(error.details[0].message)
 
   const book: Book = {
     Title: req.body.Title,
@@ -62,7 +64,6 @@ router.delete('/:id', (req: Request, res: Response, next: NextFunction) => {
   writejsonFile(filePath, books)
   res.status(200).json(books)
 })
-
 
 
 function writejsonFile(filep: string, content: any) {

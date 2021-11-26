@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Book Store</a>
@@ -43,83 +42,74 @@
         </div>
     </nav>
 
-     <!-- show case area start here. -->
+    <section class="container-fluid" id="image-container">
 
-     <section class="container-fluid" id="image-container">
+        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
+            alt="" id="showcase">
+        <p>A library is an important source of knowledge. It has reference books of all kinds besides books of
+            interest, archives of films, videos and music and plenty of digitalized Even if a student doesn’t like to
+            attend classes, one can gain an immense amount of knowledge by reading books in a library.</p>
+    </section>
 
-         <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
-             alt="" id="showcase">
-         <p>A library is an important source of knowledge. It has reference books of all kinds besides books of
-             interest, archives of films, videos and music and plenty of digitalized Even if a student doesn’t like to
-             attend classes, one can gain an immense amount of knowledge by reading books in a library.</p>
-     </section>
-     <!-- content body go here -->
+    <section class="container mt-4">
+        <h3 class="text-success text-center mb-4 mt-5">Books Of Knowlege</h3>
+        <div class="row" id="stars">
+        </div>
+    </section>
 
-     <section class="container mt-4">
-         <h3 class="text-success text-center mb-4 mt-5">Books Of Knowlege</h3>
-         <div class="row" id="stars">
-         </div>
-     </section>
-     <!-- show case area end here. -->
+    <!-- <section class="container  mb-5 mt-5">
+        
+        <div class="row">
+            <% books.forEach(( book, i ) => { %>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"> Book - Title : <%= book.Title %></h5>
+                        <p class="card-text">
+                            <%= book.description %>
+                        </p>
+                        <a href="about/<%= books.bookId%>" class="btn btn-primary">Button</a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
 
-     <!-- book section -->
-     <section class="container  mb-5 mt-5">
-         <div class="row">
-             <% display.forEach(function( books ){ %>
-             <div class="col-md-3">
-                 <div class="card">
-                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                         <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="img-fluid" />
-                         <a href="#!">
-                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                         </a>
-                     </div>
-                     <div class="card-body">
-                         <h5 class="card-title"> <%= books.Title %></h5>
-                         <p class="card-text">
-                             <%= books.description %>
-                         </p>
-                         <a href="about/<%= books.bookId%>" class="btn btn-primary">Button</a>
-                     </div>
-                 </div>
-             </div>
-             <% }) %>
+        </div>
 
-         </div>
-
-     </section>
+    </section>
+ -->
 
 
-     <!-- book section end -->
+    <footer class="text-center text-white" style="background-color: #0a4275;">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: CTA -->
+            <section class="">
+                <p class="d-flex justify-content-center align-items-center">
+                    <span class="me-3">Home of Knowledge</span>
+                    <button type="button" class="btn btn-outline-light btn-rounded">
+                        View More
+                    </button>
+                </p>
+            </section>
+            <!-- Section: CTA -->
+        </div>
+        <!-- Grid container -->
 
-     <!-- footer section, -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-white" href="https://www.github.com/Inaboya">My Github</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
 
-     <!-- Footer -->
-     <footer class="text-center text-white" style="background-color: #0a4275;">
-         <!-- Grid container -->
-         <div class="container p-4 pb-0">
-             <!-- Section: CTA -->
-             <section class="">
-                 <p class="d-flex justify-content-center align-items-center">
-                     <span class="me-3">Home of Knowledge</span>
-                     <button type="button" class="btn btn-outline-light btn-rounded">
-                         View More
-                     </button>
-                 </p>
-             </section>
-             <!-- Section: CTA -->
-         </div>
-         <!-- Grid container -->
-
-         <!-- Copyright -->
-         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-             © 2021 Copyright:
-             <a class="text-white" href="http:jerrysofttechy.com/">jerrysofttechy.com</a>
-         </div>
-         <!-- Copyright -->
-     </footer>
-     <!-- Footer -->
-     <!-- MDB -->
 </body>
 
 </html>

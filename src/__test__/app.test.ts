@@ -23,7 +23,7 @@ describe('GET /', () => {
   //test for put
   test('PUT /books/6', (done) => {
     supertest(app)
-      .put(`/books/2`)
+      .put(`/books/6`)
       .expect('Content-Type', /json/)
       .send({
         Title: 'Dragon Fly',
@@ -33,7 +33,7 @@ describe('GET /', () => {
           'A Promised Land is a memoir by Barack Obama, the 44th President  is the first of a planned two-volume series',
         pageCount: 74,
         Genre: 'autobiography',
-        bookId: 2,
+        bookId: 6,
         Publisher: 'Coke',
         dateEdited: 'Wed, 24 Nov 2021 05:15:05 GMT',
       })
@@ -55,7 +55,6 @@ describe('GET /', () => {
       .post('/books')
       .expect('Content-Type', /json/)
       .send({
-        bookId: 5,
         dateUploaded: 1637529157659,
         Title: 'agadns;gad',
         Author: 'Bsdmf.ngfga',
@@ -81,7 +80,7 @@ describe('GET /', () => {
   //test for delete
   test('DELETE /books/:id', (done) => {
     supertest(app)
-      .delete('/books/4')
+      .delete('/books/6')
       .expect('Content-Type', /json/)
       .send({
         Title: 'agadns;gad',
@@ -91,7 +90,7 @@ describe('GET /', () => {
           'A Promised Land is a memoir by Barack Obama, the 44th President of the United States from 2009 to 2017. Published on November 17, 2020, it is the first of a planned two-volume series',
         pageCount: 574,
         Genre: 'd.m,fds.fd',
-        bookId: 3,
+        bookId: 10,
         Publisher: 'dgn;sdfj;aifg',
       })
       .expect(200)

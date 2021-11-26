@@ -1,69 +1,62 @@
-import createError from "http-errors";
-import express, { Request, Response, NextFunction } from "express";
-import path from "path";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
-import os from "os";
+import createError from 'http-errors'
+import express, { Request, Response, NextFunction } from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import cors from 'cors'
+import os from 'os'
 
-import indexRouter from "./routes/index";
-import booksRouter from "./routes/books";
-import home from "./routes/home";
-import about from "./routes/about";
-import getBooks from "./routes/getBooks";
-import post_books from "./routes/postBooks";
-import { nextTick } from "process";
+import indexRouter from './routes/index'
+import booksRouter from './routes/books'
+import { nextTick } from 'process'
 
-const app = express();
+const app = express()
 
 // view engine setup
+app.set('views', path.join(__dirname, '../views'))
+app.set('view engine', 'ejs')
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../views"));
-// console.log(src);
+app.use(logger('dev'))
 
-
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(cors({
+  origin: ['http://localhost:3000/'],
+  methods : ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+}))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(function (req, res, next) {
-  console.log(
-    `Operating system details: Type: ${os.type()}, Platform: ${os.platform()})`
-  );
-  console.log(`User Hostname: ${os.hostname()}`);
-  console.log(`Network details: ${os.networkInterfaces()}`);
-  console.log(`Network details: ${os.cpus()[0]}`);
-  console.log(JSON.stringify(req.headers, null, 3));
-  console.log(JSON.stringify(res.header), null, 3);
-  next();
-});
+  console.log(`Operating system details: Type: ${os.type()}, Platform: ${os.platform()})`)
+  console.log(`User Hostname: ${os.hostname()}`)
+  console.log(`Network details: ${os.networkInterfaces()}`)
+  console.log(`Network details: ${os.cpus()[0]}`)
+  console.log(JSON.stringify(req.headers, null, 3))
+  console.log(JSON.stringify(res.header), null, 3)
+  next()
+}
+)
 
-app.use("/", indexRouter);
-app.use("/books", booksRouter);
-app.use("/home", home);
-app.use("/about", about);
-app.use("/getBooks", getBooks);
-app.use("/postBooks", post_books);
+app.use('/', indexRouter)
+app.use('/books', booksRouter)
 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
-});
+  next(createError(404))
+})
 
 // error handler
-app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
+app.use(function (err:any, req: Request, res: Response, next: NextFunction) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+  res.status(err.status || 500)
+  res.render('error')
+})
 
 // app.get('/', () => console.log('Hello World'))
 
@@ -71,4 +64,4 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 
 // app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
 
-export default app;
+export default app
