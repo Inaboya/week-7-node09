@@ -13,18 +13,18 @@
 </head>
 
 <body>
-    <div class="container">
+    <section class="container content-section">
         <h1>Books Store</h1>
-        <div id="root"></div>
-    </div>
+
+
+        <div class="shop-items" id="root"></div>
+    </section>
 
     <script>
         async function fetchBook() {
             // Headers = 'Access-Control-Allow-Origin'
-            let res = await fetch("https://week-6-task.herokuapp.com/", {
-                mode: "no-cors"
-            });
-            console.log(res);
+            let res = await fetch("https://week-6-task.herokuapp.com/");
+            // console.log(res);
 
             if (!res.ok) {
                 let msg = "An error occurred";
@@ -40,7 +40,7 @@
             let books = res;
             console.log(books);
 
-            books.map((book) => {
+            books.map((book, index) => {
                 const {
                     Title,
                     Author,
@@ -55,17 +55,21 @@
             <div class="shop-item">
                 <span class="shop-item-title">${Title}</span>
                 <img class="shop-item-image"
-                    src="https://static.zajo.net/content/mediagallery/zajo_dcat/image/product/types/X/9154.png">
+                    src="https://images-na.ssl-images-amazon.com/images/I/91K6nY47glL.jpg">
                 <div class="shop-item-details">
-                    <h3>Price: </h3><span class="shop-item-price">
-                        <p>${Author}
-                    </span>
-                    <button class="btn btn-primary shop-item-button" type="button">VIEW</button>
+                    <h3>${Author} </h3>
+                    
                 </div>
-                <p class="shop-item-price">${Description}</p>
-                <p class="shop-item-price">${pageCount}</p>
-                <p class="shop-item-price">${Genre}</p>
-                <p class="shop-item-price">${Publisher}</p>
+                    <button class="btn btn-primary" onclick="showDetails('myDiv${index}')"
+                                            type="button">VIEW</button>
+                <div style='display:none' id="myDiv${index}">
+                   <p>Description: ${Description}</p>
+                   <p>Page Count : ${pageCount}</p>
+                   <p>Genre : ${Genre}</p>
+                   <p>Publisher : ${Publisher}</p>
+                    
+                </div>
+                
             </div>
 
 
@@ -74,6 +78,17 @@
                 document.getElementById("root").innerHTML += output;
             })
         }).catch(console.log);
+
+
+        function showDetails(index) {
+            const getInfo = document.getElementById(index);
+            console.log(getInfo.style.display);
+            if (getInfo.style.display === "none") {
+                getInfo.style.display = "block";
+            } else {
+                getInfo.style.display = "none"
+            }
+        }
     </script>
 </body>
 
