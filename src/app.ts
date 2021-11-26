@@ -19,10 +19,7 @@ app.set('view engine', 'ejs')
 app.use(logger('dev'))
 
 app.use(
-  cors({
-    origin: ["https://week-6-task.herokuapp.com/"],
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-  })
+  cors()
 );
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
