@@ -3,26 +3,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.writejsonFile = void 0;
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const path_1 = __importDefault(require("path"));
-let books = require('../../database.json');
+let books = require("../../database.json");
 const fs_1 = require("fs");
-let filePath = path_1.default.join(__dirname, '../../database.json');
+let filePath = path_1.default.join(__dirname, "../../database.json");
+const users_1 = require("./users");
 /* GET books listing. */
-router.get('/', function (req, res, next) {
-    writejsonFile(filePath, books);
-    res.status(200).json(books);
+// const readBooks = () => {
+//   return readFileSync(filePath)
+// }
+// router.get("/", (req: Request, res: Response, next: NextFunction) => {
+//   res.status(200).render("view_books");
+// });
+router.get("/", users_1.authUser, function (req, res, next) {
+    // writejsonFile(filePath, books)
+    console.log('GOT HERE');
+    res.status(200).render("view_books", { books });
+});
+router.get("/add_books", users_1.authUser, (req, res, next) => {
+    res.render("add_books");
+    return;
 });
 /* GET particular book by ID */
-router.get('/:id', (req, res, next) => {
+router.get("/:id", users_1.authUser, (req, res, next) => {
     let book = books.find((c) => c.bookId === parseInt(req.params.id));
     if (!book)
-        return res.status(404).send('The book with the given ID was not found.');
+        return res.status(404).send("The book with the given ID was not found.");
     res.status(200).json(book);
 });
 /* POST a new book by ID */
-router.post('/', (req, res, next) => {
+router.get("/post", users_1.authUser, (req, res, next) => {
+    res.render("add_books");
+});
+router.post("/post", users_1.authUser, (req, res, next) => {
     // const { error } = validateGenre(req.body)
     // if (error) return res.status(400).send(error.details[0].message)
     const book = {
@@ -37,25 +53,34 @@ router.post('/', (req, res, next) => {
     };
     books.push(book);
     writejsonFile(filePath, books);
-    res.status(201).json(book);
+    res.redirect("/");
 });
-router.put('/:id', (req, res, next) => {
+router.get("/update/:id", users_1.authUser, (req, res, next) => {
+    // res.render("add_books");
+    const findBookId = books.find((el) => el.bookId === parseInt(req.params.id));
+    if (findBookId) {
+        const returnedBook = books.filter((item) => item.bookId === parseInt(req.params.id));
+        res.render("edit_books", { returnedBook });
+    }
+});
+router.put("/update/:id", users_1.authUser, (req, res, next) => {
     let book = books.find((b) => b.bookId === parseInt(req.params.id));
     if (!book)
-        return res.status(404).send('The book with the given ID was not found.');
+        return res.status(404).send("The book with the given ID was not found.");
     let body = req.body;
     let result = update(book, body);
+    books: body;
     writejsonFile(filePath, books);
-    res.status(200).json(result);
+    res.status(200).redirect("/");
 });
-router.delete('/:id', (req, res, next) => {
+router.get("/delete/:id", users_1.authUser, (req, res, next) => {
     const book = books.find((b) => b.bookId === parseInt(req.params.id));
     if (!book)
-        return res.status(404).send('The book with the given ID was not found.');
+        return res.status(404).send("The book with the given ID was not found.");
     const index = books.indexOf(book);
     books.splice(index, 1);
     writejsonFile(filePath, books);
-    res.status(200).json(books);
+    res.status(200).redirect("/");
 });
 function writejsonFile(filep, content) {
     (0, fs_1.writeFile)(filep, JSON.stringify(content, null, 3), (err) => {
@@ -63,6 +88,7 @@ function writejsonFile(filep, content) {
             return;
     });
 }
+exports.writejsonFile = writejsonFile;
 function update(book, updatedBook) {
     book.Title = updatedBook.Title ? updatedBook.Title : book.Title;
     book.Author = updatedBook.Author ? updatedBook.Author : book.Author;

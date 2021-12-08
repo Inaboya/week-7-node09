@@ -25,7 +25,7 @@ describe('GET /', () => {
     //test for put
     test('PUT /books/6', (done) => {
         (0, supertest_1.default)(app_1.default)
-            .put(`/books/6`)
+            .put(`/books/9`)
             .expect('Content-Type', /json/)
             .send({
             Title: 'Dragon Fly',
@@ -34,7 +34,7 @@ describe('GET /', () => {
             Description: 'A Promised Land is a memoir by Barack Obama, the 44th President  is the first of a planned two-volume series',
             pageCount: 74,
             Genre: 'autobiography',
-            bookId: 6,
+            bookId: 9,
             Publisher: 'Coke',
             dateEdited: 'Wed, 24 Nov 2021 05:15:05 GMT',
         })
@@ -60,7 +60,7 @@ describe('GET /', () => {
             Title: 'agadns;gad',
             Author: 'Bsdmf.ngfga',
             datePublished: '2020-0-12T19:0455.455z',
-            Description: 'A Promised Land is a memoir by Barack Obama, the 44th President of the United States from 2009 to 2017. Published on November 17, 2020, it is the first of a planned two-volume series',
+            Description: 'A Promised Land is a memoir by Barack Obama.',
             pageCount: 574,
             Genre: 'd.m,fds.fd',
             Publisher: 'dgn;sdfj;aifg',
@@ -80,16 +80,16 @@ describe('GET /', () => {
     //test for delete
     test('DELETE /books/:id', (done) => {
         (0, supertest_1.default)(app_1.default)
-            .delete('/books/6')
+            .delete('/books/11')
             .expect('Content-Type', /json/)
             .send({
             Title: 'agadns;gad',
             Author: 'Bsdmf.ngfga',
             datePublished: '2020-0-12T19:0455.455z',
-            Description: 'A Promised Land is a memoir by Barack Obama, the 44th President of the United States from 2009 to 2017. Published on November 17, 2020, it is the first of a planned two-volume series',
+            Description: 'A Promised Land is a memoir by Barack Obama.',
             pageCount: 574,
             Genre: 'd.m,fds.fd',
-            bookId: 10,
+            bookId: 9,
             Publisher: 'dgn;sdfj;aifg',
         })
             .expect(200)
