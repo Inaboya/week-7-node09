@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section class="container content-section">
+        <h1>Books Store</h1>
+
+
+        <div class="shop-items" id="root"></div>
+    </section>
+
+    <script>
+        async function fetchBook() {
+            // Headers = 'Access-Control-Allow-Origin'
+            let res = await fetch("https://week-6-task.herokuapp.com/");
+            // console.log(res);
+
+            if (!res.ok) {
+                let msg = "An error occurred";
+                throw new Error(msg)
+            }
+
+            let books = await res.json();
+            return books;
+        }
+
+
+        fetchBook().then((res) => {
+            let books = res;
+            console.log(books);
+
+            books.map((book, index) => {
+                const {
+                    Title,
+                    Author,
+                    datePublished,
+                    Description,
+                    pageCount,
+                    Genre,
+                    Publisher
+                } = book
+
+                let output = `
+            <div class="shop-item">
+                <span class="shop-item-title">${Title}</span>
+                <img class="shop-item-image"
+                    src="https://images-na.ssl-images-amazon.com/images/I/91K6nY47glL.jpg">
+                <div class="shop-item-details">
+                    <h3>${Author} </h3>
+                    
+                </div>
+                    <button class="btn btn-primary" onclick="showDetails('myDiv${index}')"
+                                            type="button">VIEW</button>
+                <div style='display:none' id="myDiv${index}">
+                   <p>Description: ${Description}</p>
+                   <p>Page Count : ${pageCount}</p>
+                   <p>Genre : ${Genre}</p>
+                   <p>Publisher : ${Publisher}</p>
+                    
+                </div>
+                
+            </div>
+
+
+            </div>`;
+
+                document.getElementById("root").innerHTML += output;
+            })
+        }).catch(console.log);
+
+
+        function showDetails(index) {
+            const getInfo = document.getElementById(index);
+            console.log(getInfo.style.display);
+            if (getInfo.style.display === "none") {
+                getInfo.style.display = "block";
+            } else {
+                getInfo.style.display = "none"
+            }
+        }
+    </script>
+</body>
+
+</html>

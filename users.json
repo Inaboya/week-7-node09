@@ -1,0 +1,43 @@
+[
+   {
+      "id": "f423da38-9ec4-493e-a84a-a23fa451785f",
+      "fullName": "David Momoh",
+      "email": "janedoe@gmail.com",
+      "password": "$2a$10$CJQmun3v4Exyn3w1dmZVtOSO9ZOG2ywv.GCe3PJvnKOppOA9Y6LVS"
+   },
+   {
+      "id": "fd11170e-488a-478b-b82b-3ec79ff29b83",
+      "fullName": "David Momoh",
+      "dateOfBirth": "1994-10-05T23:00:00.000Z",
+      "email": "janedoel@gmail.com",
+      "password": "$2a$10$J0Ad0Y0B1LHxEVXZLOfgwOMkQt/rWWqxez7Zm0RzSVqbfTxVfZbpa"
+   },
+   {
+      "id": "5964a582-b236-4bfa-953b-44d014c2a28b",
+      "fullName": "Charles Basil",
+      "dateOfBirth": "1990-03-22T00:00:00.000Z",
+      "email": "marvykim1995@gmail.com",
+      "password": "$2a$10$U6TnUtlghTCzTrzuiEiUaOkpAnufAV5fN5IbuXGyAg9T8WtXZgNMG"
+   },
+   {
+      "id": "bbb4220f-154f-47c2-a787-493c25b77c5a",
+      "fullName": "David Momoh",
+      "dateOfBirth": "1997-03-01T00:00:00.000Z",
+      "email": "momohdavid212@gmail.com",
+      "password": "$2a$10$P2KNT6YnQZJJeUH7ukeIdO7Q11Of7xb7FZ/O5.nXijU/N3/27soKe"
+   },
+   {
+      "id": "8c0ff477-27a3-441b-918a-9906d91a3752",
+      "fullName": "Stella Abioye",
+      "dateOfBirth": "1996-04-02T00:00:00.000Z",
+      "email": "stella@gmail.com",
+      "password": "$2a$10$1vCv0sQS7c0lC5BK2Kmcg.RBDoBm.o.GRtra.exL.PwZl1BHQXYMW"
+   },
+   {
+      "id": "d804119d-5e39-44cb-959f-bd5081feec9d",
+      "fullName": "Jacob John",
+      "dateOfBirth": "2004-03-23T00:00:00.000Z",
+      "email": "jacob@gmail.com",
+      "password": "$2a$10$4nAC0kfd6ayOxOj/fZfy/eeK0bVaMAatvyOLaUM8Vl3bzazkJan8K"
+   }
+]
