@@ -19,7 +19,7 @@
 
         <% returnedBook.forEach(function(book) { %>
 
-        <form action="books/update/<%= book.bookId %>" method="put">
+        <form id = "formID" method="PUT">
             <div class="form-group">
                 <label for="Title">Book Title</label>
                 <input type="text" class="form-control" name="Title" value="<%= book.Title %>" id="title"
@@ -65,7 +65,8 @@
 
             <br />
             <br />
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            <a href="/books/update/<%=book.bookId %>" data-id="<%=book.bookId %>" id="btn"
+                class="btn btn-primary w-100">Submit</a>
         </form>
 
 
@@ -74,7 +75,45 @@
 
 
 
+
+
+        <script>
+            const button = document.getElementById("btn")
+            const author = document.getElementById("author")
+            const description = document.getElementById("description")
+            const datePublished = document.getElementById("date-published")
+            const title = document.getElementById("title")
+            const genre = document.getElementById("genre")
+            const publisher = document.getElementById("publisher")
+            const pageCount = document.getElementById("pageCount")
+            
+
+            button.addEventListener('click', async (e) => {
+                e.preventDefault()
+
+                const edit = e.target.dataset.id;
+
+
+                await fetch(`/books/update/${edit}`, {
+                    method : "PUT",
+                    headers : {"Content-Type" : "application/json"},
+
+                    body : JSON.stringify({
+                        Title : title.value,
+                        Author : author.value,
+                        datePublished : datePublished.value,
+                        Description : description.value,
+                        pageCount : pageCount.value,
+                        Genre : genre.value,
+                        Publisher : publisher.value
+                    })
+                })
+            })
+        </script>
+
     </div>
 </body>
+
+
 
 </html>

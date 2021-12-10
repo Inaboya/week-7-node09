@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 const router = express.Router();
 import path from "path";
 import { Book, ErrorInt } from "./interface";
-let books = require("../../database.json");
+
 import { fstat, writeFile, readFileSync } from "fs";
 let filePath = path.join(__dirname, "../../database.json");
 
@@ -14,31 +14,24 @@ import { authUser }  from "./users";
 //   return readFileSync(filePath)
 // }
 
-// router.get("/", (req: Request, res: Response, next: NextFunction) => {
-//   res.status(200).render("view_books");
-// });
+let books = require("../../database.json");
 
-router.get("/", authUser , function (req: Request, res: Response, next: NextFunction) {
-  // writejsonFile(filePath, books)
-  console.log('GOT HERE')
+
+router.get("/" , authUser, function (req: Request, res: Response, next: NextFunction) {
 
   res.status(200).render("view_books", { books });
 });
 
-router.get("/add_books", authUser, (req: Request, res: Response, next: NextFunction) => {
-  res.render("add_books");
-  return;
-});
 
 /* GET particular book by ID */
-router.get("/:id", authUser, (req: Request, res: Response, next: NextFunction) => {
+// router.get("/:id", authUser, (req: Request, res: Response, next: NextFunction) => {
 
-  let book = books.find((c: Book) => c.bookId === parseInt(req.params.id));
-  if (!book)
-    return res.status(404).send("The book with the given ID was not found.");
+//   let book = books.find((c: Book) => c.bookId === parseInt(req.params.id));
+//   if (!book)
+//     return res.status(404).send("The book with the given ID was not found.");
 
-  res.status(200).json(book);
-});
+//   res.status(200).json(book);
+// });
 
 /* POST a new book by ID */
 
@@ -67,7 +60,7 @@ router.post("/post", authUser,  (req: Request, res: Response, next: NextFunction
   books.push(book);
   writejsonFile(filePath, books);
 
-  res.redirect("/");
+  res.redirect("/books");
 });
 
 
@@ -91,16 +84,16 @@ router.put("/update/:id", authUser, (req: Request, res: Response, next: NextFunc
   let book = books.find((b: Book) => b.bookId === parseInt(req.params.id));
   if (!book)
     return res.status(404).send("The book with the given ID was not found.");
-  let body = req.body;
-  let result = update(book, body);
+  let updatedBook = req.body;
+  let result = update(book, updatedBook);
   
 
 
-  books: body;
-  writejsonFile(filePath, books);
+  writejsonFile(filePath, result);
 
-  res.status(200).redirect("/");
+  res.status(200).redirect("/books");
 
+  
 
 });
 
@@ -115,7 +108,7 @@ router.get(
     const index = books.indexOf(book);
     books.splice(index, 1);
     writejsonFile(filePath, books);
-    res.status(200).redirect("/");
+    res.status(200).redirect("/books");
   }
 );
 

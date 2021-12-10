@@ -1,4 +1,4 @@
-FROM node:12-stretch
+FROM node:12-stretch AS BUILD_IMAGE
 
 
 
@@ -22,6 +22,14 @@ COPY . .
 
 
 RUN yarn build
+
+FROM node:12-stretch
+
+WORKDIR /home/node/app
+
+# copy from build image
+COPY --from=BUILD_IMAGE /home/node/app/dist ./dist
+COPY --from=BUILD_IMAGE /home/node/app/node_modules ./node_modules
 
 EXPOSE 3000
 

@@ -181,7 +181,7 @@ router.post("/login", async (req: Request, res: Response) => {
       let max = "2h";
 
       secret = process.env.ACCESS_TOKEN_SECRET_KEY as string;
-      console.log(process.env.ACCESS_TOKEN_SECRET_KEY, "LOGIN STRING");
+      // console.log(process.env.ACCESS_TOKEN_SECRET_KEY, "LOGIN STRING");
 
       const token = jwt.sign({ email }, secret as string, {
         expiresIn: max,
@@ -201,7 +201,7 @@ export const authUser = (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.cookies.jwt;
 
-    console.log(secret, "TOKEN****");
+    // console.log(secret, "TOKEN****");
 
     if (token) {
       jwt.verify(token, secret as string, (err: any, decodedToken: any) => {

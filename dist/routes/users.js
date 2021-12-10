@@ -137,7 +137,7 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
             //Token
             let max = "2h";
             secret = process.env.ACCESS_TOKEN_SECRET_KEY;
-            console.log(process.env.ACCESS_TOKEN_SECRET_KEY, "LOGIN STRING");
+            // console.log(process.env.ACCESS_TOKEN_SECRET_KEY, "LOGIN STRING");
             const token = jsonwebtoken_1.default.sign({ email }, secret, {
                 expiresIn: max,
             });
@@ -153,7 +153,7 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
 const authUser = (req, res, next) => {
     try {
         const token = req.cookies.jwt;
-        console.log(secret, "TOKEN****");
+        // console.log(secret, "TOKEN****");
         if (token) {
             jsonwebtoken_1.default.verify(token, secret, (err, decodedToken) => {
                 console.log(err);

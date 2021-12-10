@@ -7,7 +7,6 @@ exports.writejsonFile = void 0;
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const path_1 = __importDefault(require("path"));
-let books = require("../../database.json");
 const fs_1 = require("fs");
 let filePath = path_1.default.join(__dirname, "../../database.json");
 const users_1 = require("./users");
@@ -15,25 +14,17 @@ const users_1 = require("./users");
 // const readBooks = () => {
 //   return readFileSync(filePath)
 // }
-// router.get("/", (req: Request, res: Response, next: NextFunction) => {
-//   res.status(200).render("view_books");
-// });
+let books = require("../../database.json");
 router.get("/", users_1.authUser, function (req, res, next) {
-    // writejsonFile(filePath, books)
-    console.log('GOT HERE');
     res.status(200).render("view_books", { books });
 });
-router.get("/add_books", users_1.authUser, (req, res, next) => {
-    res.render("add_books");
-    return;
-});
 /* GET particular book by ID */
-router.get("/:id", users_1.authUser, (req, res, next) => {
-    let book = books.find((c) => c.bookId === parseInt(req.params.id));
-    if (!book)
-        return res.status(404).send("The book with the given ID was not found.");
-    res.status(200).json(book);
-});
+// router.get("/:id", authUser, (req: Request, res: Response, next: NextFunction) => {
+//   let book = books.find((c: Book) => c.bookId === parseInt(req.params.id));
+//   if (!book)
+//     return res.status(404).send("The book with the given ID was not found.");
+//   res.status(200).json(book);
+// });
 /* POST a new book by ID */
 router.get("/post", users_1.authUser, (req, res, next) => {
     res.render("add_books");
@@ -53,7 +44,7 @@ router.post("/post", users_1.authUser, (req, res, next) => {
     };
     books.push(book);
     writejsonFile(filePath, books);
-    res.redirect("/");
+    res.redirect("/books");
 });
 router.get("/update/:id", users_1.authUser, (req, res, next) => {
     // res.render("add_books");
@@ -67,11 +58,10 @@ router.put("/update/:id", users_1.authUser, (req, res, next) => {
     let book = books.find((b) => b.bookId === parseInt(req.params.id));
     if (!book)
         return res.status(404).send("The book with the given ID was not found.");
-    let body = req.body;
-    let result = update(book, body);
-    books: body;
-    writejsonFile(filePath, books);
-    res.status(200).redirect("/");
+    let updatedBook = req.body;
+    let result = update(book, updatedBook);
+    writejsonFile(filePath, result);
+    res.status(200).redirect("/books");
 });
 router.get("/delete/:id", users_1.authUser, (req, res, next) => {
     const book = books.find((b) => b.bookId === parseInt(req.params.id));
@@ -80,7 +70,7 @@ router.get("/delete/:id", users_1.authUser, (req, res, next) => {
     const index = books.indexOf(book);
     books.splice(index, 1);
     writejsonFile(filePath, books);
-    res.status(200).redirect("/");
+    res.status(200).redirect("/books");
 });
 function writejsonFile(filep, content) {
     (0, fs_1.writeFile)(filep, JSON.stringify(content, null, 3), (err) => {

@@ -17,7 +17,7 @@
     <div class="container text-center">
         <h2>Books Store</h2>
 
-        <a href="add_books" class="btn btn-sm btn-success">Contribute</a>
+        <a href="/books/post" class="btn btn-sm btn-success">Contribute</a>
         <br />
         <br />
 
@@ -40,13 +40,27 @@
                     <td><%= book.Genre %></td>
                     <td>
                         <a href="books/update/<%=book.bookId %>" class="btn btn-sm btn-success">Edit</a>
-                        <a href="books/delete/<%=book.bookId %>" class="btn btn-sm btn-danger">Delete</button>
+                        <a href="books/delete/<%=book.bookId %>" id="delete" data-id="<%=book.bookId %>"
+                            class="btn btn-sm btn-danger">Delete</button>
                     </td>
                 </tr>
-                <% });%>
+                <% })%>
             </tbody>
         </table>
     </div>
 </body>
+
+<script>
+    document.getElementById("delete").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const bookId = e.target.dataset.id;
+
+        await fetch(`/delete/${bookId}`, {
+            method: "DELETE"
+        }).then(res.json())
+
+    })
+</script>
 
 </html>
